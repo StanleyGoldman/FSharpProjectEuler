@@ -58,3 +58,15 @@ let problem15_attempt2 () =
         | false, false, (x,y) -> 1I
      
     countPaths (0, 0)
+
+let problem15_attempt3 () =
+    let maxX = 20
+    let maxY = 20
+
+    let matrix = Array2D.create 21  21 1I
+
+    for row = ((Array2D.length1 matrix) - 2) downto 0 do
+        for column = ((Array2D.length2 matrix) - 2) downto 0 do
+            matrix.[row, column] <- matrix.[row + 1, column] + matrix.[row, column + 1] 
+
+    matrix.[0, 0]

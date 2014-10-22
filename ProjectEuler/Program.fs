@@ -53,7 +53,7 @@ let timedOperation operation =
     let result = operation ()
     (result, stopwatch.Elapsed)
 
-let result, time = timedOperation problem15_attempt2
+let result, time = timedOperation problem15_attempt3
 
 Console.WriteLine(sprintf "%s Time: %fms" (result.ToString()) (time.TotalMilliseconds))
 Console.ReadLine()
