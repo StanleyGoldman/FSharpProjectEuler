@@ -1,4 +1,4 @@
-﻿open Problem10
+﻿open Problem15
 open System
 open System.Diagnostics
    
@@ -53,7 +53,7 @@ let timedOperation operation =
     let result = operation ()
     (result, stopwatch.Elapsed)
 
-let result, time = timedOperation problem10
+let result, time = timedOperation problem15_attempt2
 
 Console.WriteLine(sprintf "%s Time: %fms" (result.ToString()) (time.TotalMilliseconds))
 Console.ReadLine()
