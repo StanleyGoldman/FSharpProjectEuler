@@ -8,6 +8,7 @@ let problem23 () =
         |> Seq.map(fun factor1 -> (factor1, (ofNumber / factor1)))
         |> Seq.takeWhile(fun (factor1, factor2) -> factor1 <= factor2)
         |> Seq.fold (fun acc (factor1, factor2) -> factor1 :: factor2 :: acc) []
+        |> Seq.distinct
         |> Seq.append [1L]
         |> Seq.toList
 
@@ -16,15 +17,31 @@ let problem23 () =
         |> Seq.sum
 
     let abundantNumbers = 
-        Seq.initInfinite(fun i -> (int64) i)
+        Seq.initInfinite(fun i -> (int64) i + 2L)
         |> Seq.takeWhile(fun i -> i <= 28123L)
         |> Seq.filter(fun i -> (sumOfFactors i) > i)
+        |> Seq.toList
 
-    let threadList (thread:seq<int64>) =
-        let head = Seq.head thread
-        let tail = Seq.skip 1 thread
+    let sumsOfAbundantNumbers =
+        abundantNumbers
+        |> Seq.mapi(fun index value ->
+            abundantNumbers
+            |> Seq.skip index
+            |> Seq.map (fun value2 -> value + value2))
+        |> Seq.concat
+        |> Seq.filter(fun i -> i <= 28123L)
+        |> Seq.sort
+        |> Seq.distinct
 
-        tail
-        |> Seq.map(fun i -> head + i)
+    let nonSumsOfAbundantNumbers = 
+        sumsOfAbundantNumbers
+        |> Seq.append [0L]
+        |> Seq.pairwise
+        |> Seq.map(fun (sum1,sum2) ->
+                [sum1 .. sum2]
+                |> Seq.filter(fun i -> not(i=sum1 || i=sum2))
+                |> Seq.toList)
+        |> Seq.concat
 
-    "boo"
+    nonSumsOfAbundantNumbers
+    |> Seq.sum
