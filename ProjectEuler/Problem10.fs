@@ -12,11 +12,6 @@ let problem10 () =
             | 1L -> true
             | x when divisor = possiblePrime -> true
             | _ -> possiblePrime % divisor > 0L)
-        |> function
-            | true ->
-                //System.Console.WriteLine("Prime: " + (possiblePrime.ToString()))
-                true
-            | false -> false
 
     Seq.initInfinite (fun index -> int64(index + 2))
     |> Seq.filter(fun possiblePrime -> testPrime possiblePrime)
