@@ -58,7 +58,7 @@ let problem26 () =
         node.Children.Clear()
         node.Children.Add childNode
         node.Content <- prefix
-  
+  (*
     let buildSuffixTree (input:string) = 
         let suffixTreeRoot = {Children = new List<SuffixTreeNode>()}
     
@@ -78,11 +78,11 @@ let problem26 () =
                 | _ -> ())
     
         suffixTreeRoot
-
     //let prefixes = splitStringPrefixes "dogsdogs"
     //let suffixes = splitStringSuffixes "dogsdogs"
 
     let suffixTree = buildSuffixTree "missis"
+        *)
 
     //let testOne = stringStartsWithPrefix "anana" "bana"
     
